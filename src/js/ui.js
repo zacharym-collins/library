@@ -26,6 +26,9 @@ class UI {
         this.addBookBtn.addEventListener("click", () => this.openBookModal());
         this.cancelBtn.addEventListener("click", () => this.closeBookModal());
         this.form.addEventListener("submit", () => this.submitBookToLibrary());
+        this.booksDisplay.addEventListener("click", (event) => {
+            this.handleBooksDisplayCLick(event);
+        });
         
 
     }
