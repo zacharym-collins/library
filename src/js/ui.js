@@ -25,6 +25,7 @@ class UI {
     bindEvents() {
         this.addBookBtn.addEventListener("click", () => this.openBookModal());
         this.cancelBtn.addEventListener("click", () => this.closeBookModal());
+        this.form.addEventListener("submit", () => this.submitBookToLibrary());
 
     }
 
@@ -80,6 +81,17 @@ class UI {
     }
 
     closeBookModal() {
+        this.modal.close();
+    }
+
+    submitBookToLibrary() {
+        const title = document.getElementById("title-input").value.trim();
+        const author = document.getElementById("author-input").value.trim();
+        const pages = Number(document.getElementById("pages-input").value);
+        const read = this.form.querySelector('input[name="read"]:checked').value === "yes";
+
+        this.library.addBookToLibrary(title, author, pages, read);
+        this.render();
         this.modal.close();
     }
 }
