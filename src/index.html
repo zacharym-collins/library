@@ -21,12 +21,51 @@
         </div>
     </header>
 
-    <main id="books-display">
-
+    <main>
+        <div id="books-display"></div>
+        <button id="add-btn" aria-label="Add Book">+</button>
     </main>
 
     <footer>
         <p id="footer-text">Copyright © Zachary Collins 2026</p>
     </footer>
+
+        <dialog id="book-modal">
+        <div class="modal-inner">
+            <h2>Add a book</h2>
+            <form id="book-form" method="dialog">
+                <div class="field">
+                    <label for="title-input">Title</label>
+                    <input id="title-input" name="title" type="text" required />
+                </div>
+                <div class="field">
+                    <label for="author-input">Author</label>
+                    <input id="author-input" name="author" type="text" required />
+                </div>
+                <div class="field">
+                    <label for="pages-input">Pages</label>
+                    <input id="pages-input" name="pages" type="number" min="1" required />
+                </div>
+                <div class="field">
+                    <label>Read?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="read" value="yes" />
+                            Yes
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="read" value="no" checked />
+                            No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 </body>
 </html>
