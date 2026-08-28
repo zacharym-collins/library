@@ -8,6 +8,7 @@ class Library {
     addBookToLibrary(title, author, pages, read) {
         const book = new Book(title, author, pages, read);
         this.books.push(book);
+        this.saveToStorage();
         return book;
     }
 
@@ -30,6 +31,7 @@ class Library {
     toggleBookRead(id) {
         const book = this.getBookById(id);
         book.toggleRead();
+        this.saveToStorage();
         return book;
     }
 
@@ -47,7 +49,16 @@ class Library {
             1,
         );
 
+        this.saveToStorage();
+
         return deletedBook;
+    }
+
+    saveToStorage() {
+        localStorage.setItem(
+            "libraryBooks",
+            JSON.stringify(this.books)
+        );
     }
 }
 
