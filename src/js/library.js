@@ -68,7 +68,9 @@ class Library {
             return;
         }
 
-        this.books = JSON.parse(storedBooks);
+        const parsedBooks = JSON.parse(storedBooks);
+
+        this.books = parsedBooks.map(book => Book.fromObject(book));
     }
 }
 
