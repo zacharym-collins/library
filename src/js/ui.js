@@ -29,6 +29,9 @@ class UI {
         this.booksDisplay.addEventListener("click", (event) => {
             this.handleBooksDisplayClick(event);
         });
+        window.addEventListener("hashchange", () => {
+            this.render();
+        })
         
 
     }
@@ -36,14 +39,30 @@ class UI {
     render() {
         this.booksDisplay.replaceChildren();
 
-        if (this.library.books.length === 0) {
+        let books;
+
+        switch (window.location.hash) {
+            case "#/read":
+                books = this.library.getReadBooks();
+                break;
+            
+            case "#/unread":
+                books = this.library.getUnreadBooks();
+                break;
+            
+            default:
+                books = this.library.getAllBooks();
+        }
+
+        if (books.length === 0) {
             const infoPara = document.createElement("p");
-            infoPara.textContent = "No books to display. Press the add book button.";
+            infoPara.textContent = "No books to display";
             this.booksDisplay.appendChild(infoPara);
-        } else {
-            for (const book of this.library.books) {
-                this.createBookElement(book);
-            }
+            return;
+        }
+
+        for (const book of books) {
+            this.createBookElement(book);
         }
     }
 
