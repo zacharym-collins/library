@@ -27,7 +27,13 @@ class Library {
         return this.books.filter(book => !book.read);
     }
 
-    deleteBook(id) {
+    toggleBookRead(id) {
+        const book = this.getBookById(id);
+        book.toggleRead();
+        return book;
+    }
+
+    deleteBookFromLibrary(id) {
         const bookIndex = this.books.findIndex(
             book => book.id === id
         );
@@ -36,7 +42,7 @@ class Library {
             throw new Error("Book not found");
         }
 
-        const [deletedBook] = this.tasks.splice(
+        const [deletedBook] = this.books.splice(
             bookIndex,
             1,
         );

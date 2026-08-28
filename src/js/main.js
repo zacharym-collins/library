@@ -1,4 +1,5 @@
 import { Library } from "./library.js";
+import { UI } from "./ui.js";
 
 const library = new Library();
 
@@ -29,3 +30,6 @@ library.addBookToLibrary(
     250,
     true,
 )
+
+const ui = new UI(library);
+ui.init();
