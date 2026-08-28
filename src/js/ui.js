@@ -1,15 +1,36 @@
 class UI {
     constructor(library) {
         this.library = library;
+
         this.booksDisplay = null;
+        this.modal = null;
+        this.form = null;
+        this.addBookBtn = null;
+        this.cancelBtn = null;
+        this.submitBtn = null;
     }
 
     init() {
         this.booksDisplay = document.getElementById("books-display");
+        this.modal = document.getElementById("book-modal");
+        this.form = document.getElementById("book-form");
+        this.addBookBtn = document.getElementById("add-btn");
+        this.cancelBtn = document.getElementById("cancel-btn");
+        this.submitBtn = document.getElementById("submit-btn");
+
+        this.bindEvents();
         this.render();
     }
 
+    bindEvents() {
+        this.addBookBtn.addEventListener("click", () => this.openBookModal());
+        this.cancelBtn.addEventListener("click", () => this.closeBookModal());
+
+    }
+
     render() {
+        this.booksDisplay.replaceChildren();
+
         if (this.library.books.length === 0) {
             const infoPara = document.createElement("p");
             infoPara.textContent = "No books to display. Press the add book button.";
@@ -50,6 +71,16 @@ class UI {
         );
 
         this.booksDisplay.appendChild(article);
+    }
+
+    openBookModal() {
+        this.form.reset();
+        this.modal.showModal();
+        this.form.elements.author.focus();
+    }
+
+    closeBookModal() {
+        this.modal.close();
     }
 }
 
