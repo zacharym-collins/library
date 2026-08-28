@@ -27,7 +27,7 @@ class UI {
         this.cancelBtn.addEventListener("click", () => this.closeBookModal());
         this.form.addEventListener("submit", () => this.submitBookToLibrary());
         this.booksDisplay.addEventListener("click", (event) => {
-            this.handleBooksDisplayCLick(event);
+            this.handleBooksDisplayClick(event);
         });
         
 
@@ -101,6 +101,40 @@ class UI {
         this.library.addBookToLibrary(title, author, pages, read);
         this.render();
         this.modal.close();
+    }
+
+    handleBooksDisplayClick(event) {
+        const button = event.target.closest("button[data-action]");
+
+        if (!button || !this.booksDisplay.contains(button)) {
+            return;
+        }
+
+        const bookCard = button.closest(".book-card");
+        if (!bookCard) {
+            return;
+        }
+
+        const bookId = bookCard.dataset.id;
+        const action = button.dataset.action;
+
+        if (action === "toggle-read") {
+            this.toggleBookRead(bookId);
+        }
+
+        if (action === "delete") {
+            this.deleteBook(bookId);
+        }
+    }
+
+    toggleBookRead(bookId) {
+        this.library.toggleBookRead(bookId);
+        this.render();
+    }
+
+    deleteBook(bookId) {
+        this.library.deleteBookFromLibrary(bookId);
+        this.render();
     }
 
 }
