@@ -12,6 +12,19 @@ class Book {
         this.read = read;
     }
 
+    static fromObject(obj) {
+        const book = new Book(
+            obj.title,
+            obj.author,
+            obj.pages,
+            obj.read
+        );
+
+        book.id = obj.id;
+
+        return book;
+    }
+
     toggleRead() {
         this.read = !this.read;
         return this;
