@@ -60,6 +60,16 @@ class Library {
             JSON.stringify(this.books)
         );
     }
+
+    loadFromStorage() {
+        const storedBooks = localStorage.getItem("libraryBooks");
+
+        if (!storedBooks) {
+            return;
+        }
+
+        this.books = JSON.parse(storedBooks);
+    }
 }
 
 export { Library };
