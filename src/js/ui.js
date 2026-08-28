@@ -26,6 +26,7 @@ class UI {
         this.addBookBtn.addEventListener("click", () => this.openBookModal());
         this.cancelBtn.addEventListener("click", () => this.closeBookModal());
         this.form.addEventListener("submit", () => this.submitBookToLibrary());
+        
 
     }
 
@@ -58,9 +59,13 @@ class UI {
         pagesPara.textContent = `${book.pages} pages`;
 
         const readBtn = document.createElement("button");
-        readBtn.textContent = !book.read ? "Not Read" : "Read";
+        readBtn.type = "button";
+        readBtn.dataset.action = "toggle-read";
+        readBtn.textContent = book.read ? "Read" : "Not Read";
 
         const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.dataset.action = "delete";
         delBtn.textContent = "Remove";
 
         article.append(
@@ -94,6 +99,7 @@ class UI {
         this.render();
         this.modal.close();
     }
+
 }
 
 export { UI };
