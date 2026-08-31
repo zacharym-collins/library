@@ -104,7 +104,7 @@ class UI {
     openBookModal() {
         this.form.reset();
         this.modal.showModal();
-        this.form.elements.author.focus();
+        this.form.elements.title.focus();
     }
 
     closeBookModal() {
